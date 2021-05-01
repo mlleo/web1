@@ -1,0 +1,35 @@
+use ssafydb;
+show tables;
+CREATE TABLE IF NOT EXISTS susers (
+  sid INT NOT NULL AUTO_INCREMENT,
+  sname VARCHAR(45) NOT NULL,
+  spwd VARCHAR(45) NOT NULL,
+  sfavor VARCHAR(45) Not NULL,
+  sdate DATE NULL,
+  PRIMARY KEY (sid));
+
+select now() ;
+desc susers; 
+insert into susers(sname,spwd,sfavor,sdate)
+values('강지은','1234','야들야들 불고기',now());
+insert into susers(sname,spwd,sfavor,sdate)
+values('권순주','1235','불가리 야들야들',now());
+insert into susers(sname,spwd,sfavor,sdate)
+values('김낙현','1236','한입맛 샤브',now());
+insert into susers(sname,spwd,sfavor,sdate)
+values('김애은','1237','푸아그라',now());
+
+commit;
+
+show tables;
+desc susers;
+select * from susers;
+select count(*) from susers;
+select * from susers where sname like '%김%';
+
+-- 김낙현씨보다 sid가 작은 사람들 
+select sid from susers where sname='김낙현';
+select * from susers
+where sid <
+ (select sid from susers where sname='김낙현');
+ select * from susers order by sid desc;

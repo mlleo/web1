@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+<div id="div1">
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+</div>
+
+<script>
+var para = document.createElement("p");
+para.setAttribute('style', 'color:red');
+//<p style='color:red'></p>
+var node = document.createTextNode("This is new.");
+//This is new.
+para.appendChild(node);
+//<p>This is new.</p>
+var element = document.getElementById("div1");
+element.appendChild(para);
+
+var aa=document.createElement("div");
+//<div></div>
+var bb=document.createElement("input");
+var dd=document.createElement("br");
+//<input ></input>
+bb.setAttribute('type', 'text');
+//<input type='text'></input>
+var cc=document.createElement("img");
+cc.setAttribute('src', 'img/hello.png');
+cc.setAttribute('alt', 'img/hello.png');
+var ee=document.createElement("input");
+ee.setAttribute('type', 'radio');
+ee.setAttribute('name', 'gender');
+var ff=document.createElement("span");
+var gg = document.createTextNode("여성");
+ff.appendChild(gg);
+
+
+
+aa.appendChild(bb);
+aa.appendChild(dd);
+aa.appendChild(cc);
+aa.appendChild(cc);
+element.appendChild(aa);
+element.appendChild(ee);
+element.appendChild(ff);
+
+</script>
+
+</body>
+</html>

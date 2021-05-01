@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+<meta charset="utf-8">
+<title>regi</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#_btnGetid").click(function(){
+      var _id=$("#_id").val();
+      if(_id==''){
+    	  alert('아이디를 입력하세요');
+      }else{
+    	  showGetId(_id);
+      }
+  });
+  function showGetId(id){
+	  $.ajax({
+		   type: "GET",
+		   url: "./idcheck.jsp",
+		   async: true,		   
+		   success: function(msg){
+			   //alert('hello');
+				outputList(id,msg);
+		   }
+	 });
+  }
+  function outputList(id,users){
+	  var list=$(users).find("user");
+	  //alert(list.length);
+	  var aa=false;
+	  $(list).each(function(index, item) {
+	  	 var tid=$(this).find("id").text();
+	  	 if(tid==id){
+	  		 aa=true;
+	  		 return;
+	  	 }
+	  });
+	  
+	  if(aa){
+		  $("#_rgetid").html("사용할 수 없는 아이디 입니다.");
+		  $("#_rgetid").css("background-color","#FF0000");
+	      $("#_userid").val("");
+	  }else{
+		  $("#_rgetid").html("사용할 수 있는 아이디 입니다.");
+		  $("#_rgetid").css("background-color","#0000FF");
+		  $("#_userid").val($("#_id").val());
+	  }
+	  
+  }
+});
+</script>
+</head>
+<body>
+<div id='section'>
+<form action="" method='post'>
+<table style='border:1px solid black'>
+<colgroup>
+<col width="200px"/>
+<col width="500px"/>
+</colgroup>
+<tr>
+<th>아이디체크</th>
+<td><input type="text" name="sid" id="_id" size="30"/>
+<a href="#none" id="_btnGetid" title="회원가입">
+	<img width='50px' height='20px' src="img/idcheck.png" alt="회원가입" />
+</a>
+<div id='_rgetid'></div>
+</td>
+</tr>
+<tr>
+<th>아이디</th>
+<td><input type="text" id='_userid' name='id' size="30" readonly="readonly" /> </td>
+</tr>
+<tr>
+<th>패스워드</th>
+<td><input type="password" id='_pwd' name='pwd' size="30"/></td>
+</tr>
+<tr>
+<th>주소</th>
+<td><input type="text" id='_addr' name='addr' size="30"/></td>
+</tr>
+<tr>
+<td colspan="2"><button type="button" id='_btnRegi'>회원가입</button>
+<button type="button" id='_btnRegiCan'>취소</button></td>
+</tr>
+</table>
+</form>
+</div>
+</body>
+</html>
